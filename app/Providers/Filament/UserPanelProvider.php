@@ -28,7 +28,6 @@ class UserPanelProvider extends PanelProvider
             ->maxContentWidth(Width::FourExtraLarge)
             ->globalSearch(false)
             ->login(Login::class)
-//            ->login()
             ->registration()
             ->profile()
             ->passwordReset()
