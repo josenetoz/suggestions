@@ -93,7 +93,7 @@ class SuggestionsTable
                     DeleteAction::make(),
                     RestoreAction::make(),
                 ])
-                    ->visible(fn() => auth()->user()->hasRole('admin'))
+                    ->visible(fn () => auth()->user()->hasRole('admin'))
                     ->icon(Heroicon::Cog6Tooth)
                     ->size('sm')
                     ->label(false)

@@ -60,7 +60,6 @@ class User extends Authenticatable implements FilamentUser
         });
     }
 
-
     public function suggestions(): HasMany
     {
         return $this->hasMany(Suggestion::class);

@@ -15,7 +15,6 @@ use Exception;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 
 class SuggestionResource extends Resource
 {
@@ -75,11 +74,11 @@ class SuggestionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => ListSuggestions::route('/'),
-            'create' => CreateSuggestion::route('/create'),
-            'view'   => ViewSuggestion::route('/{record}'),
+            'index'      => ListSuggestions::route('/'),
+            'create'     => CreateSuggestion::route('/create'),
+            'view'       => ViewSuggestion::route('/{record}'),
             'activities' => ListSuggestionsActivities::route('/{record}/activities'),
-            'edit'   => EditSuggestion::route('/{record}/edit'),
+            'edit'       => EditSuggestion::route('/{record}/edit'),
         ];
     }
 

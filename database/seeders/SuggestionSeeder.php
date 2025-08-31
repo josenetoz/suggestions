@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\{Suggestion, User, Vote};
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 class SuggestionSeeder extends Seeder

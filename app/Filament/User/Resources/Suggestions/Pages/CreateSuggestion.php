@@ -4,7 +4,6 @@ namespace App\Filament\User\Resources\Suggestions\Pages;
 
 use App\Enums\Status;
 use App\Filament\User\Resources\Suggestions\SuggestionResource;
-use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Support\Enums\Alignment;
 
@@ -17,7 +16,7 @@ class CreateSuggestion extends CreateRecord
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['user_id'] = auth()->id();
-        $data['status'] = Status::Draft;
+        $data['status']  = Status::Draft;
 
         return $data;
     }

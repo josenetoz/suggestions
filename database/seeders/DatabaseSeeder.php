@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-//        $this->call([
-//            SuggestionSeeder::class,
-//        ]);
+        //        $this->call([
+        //            SuggestionSeeder::class,
+        //        ]);
         $adminRole = Role::firstOrCreate(['name' => 'admin']);
         $userRole  = Role::firstOrCreate(['name' => 'user']);
 
@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
             'name'  => 'Administrador',
             'email' => 'admin@exemplo.com',
         ]);
-
 
     }
 }

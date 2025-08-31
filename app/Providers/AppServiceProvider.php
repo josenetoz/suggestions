@@ -2,12 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\Suggestion;
-use App\Policies\SuggestionPolicy;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\{Event, URL};
-use Illuminate\Support\Uri;
+use Illuminate\Support\Facades\{URL};
+use Illuminate\Support\{ServiceProvider};
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +20,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        URL::forceHttps();
     }
 }
