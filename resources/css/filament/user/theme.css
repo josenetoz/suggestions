@@ -1,0 +1,6 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@import '../../../../vendor/pxlrbt/filament-activity-log/resources/css/styles.css';
+
+@source '../../../../app/Filament/User/**/*';
+@source '../../../../resources/views/filament/user/**/*';

@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__laravel-boost__database-schema",
+      "mcp__laravel-boost__list-artisan-commands",
+      "Bash(php artisan make:factory:*)",
+      "Bash(php.exe artisan make:factory:*)"
+    ],
+    "deny": [],
+    "ask": [],
+    "additionalDirectories": [
+      "C:\\mnt\\c\\Users\\JOSE\\PhpstormProjects"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "laravel-boost"
+  ]
+}
