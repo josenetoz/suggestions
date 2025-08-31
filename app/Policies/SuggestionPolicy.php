@@ -6,12 +6,12 @@ use App\Models\{Suggestion, User};
 
 class SuggestionPolicy
 {
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
         return true;
     }
 
-    public function view(User $user, Suggestion $suggestion): bool
+    public function view(?User $user, Suggestion $suggestion): bool
     {
         return true;
     }
@@ -23,12 +23,22 @@ class SuggestionPolicy
 
     public function update(User $user, Suggestion $suggestion): bool
     {
-        return $user->isAdmin();
+        return $user->id === $suggestion->user_id || $user->isAdmin();
     }
 
     public function delete(User $user, Suggestion $suggestion): bool
     {
         return $user->isAdmin();
+    }
+
+    public function vote(User $user, Suggestion $suggestion): bool
+    {
+        return true;
+    }
+
+    public function comment(User $user, Suggestion $suggestion): bool
+    {
+        return true;
     }
 
     public function changeStatus(User $user, Suggestion $suggestion): bool

@@ -5,12 +5,13 @@ namespace App\Filament\User\Resources\Suggestions\Pages;
 use App\Enums\Status;
 use App\Filament\User\Resources\Suggestions\SuggestionResource;
 use App\Models\Suggestion;
-use Filament\Actions\CreateAction;
+use Filament\Actions\{Action, CreateAction};
 use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Support\Enums\IconPosition;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class ListSuggestions extends ListRecords
 {
@@ -18,12 +19,29 @@ class ListSuggestions extends ListRecords
 
     protected function getHeaderActions(): array
     {
+        if (Auth::check()) {
+            return [
+                CreateAction::make()
+                    ->label(__('suggestions.make_suggestion'))
+                    ->color('info')
+                    ->iconPosition(IconPosition::After)
+                    ->icon(Heroicon::LightBulb),
+            ];
+        }
+
         return [
-            CreateAction::make()
-                ->label(__('suggestions.make_suggestion'))
-                ->color('info')
+            Action::make('login')
+                ->label(__('Log in'))
+                ->color('primary')
                 ->iconPosition(IconPosition::After)
-                ->icon(Heroicon::LightBulb),
+                ->icon(Heroicon::ArrowRightOnRectangle)
+                ->url(route('filament.user.auth.login')),
+            Action::make('register')
+                ->label(__('Register'))
+                ->color('gray')
+                ->iconPosition(IconPosition::After)
+                ->icon(Heroicon::UserPlus)
+                ->url(route('filament.user.auth.register')),
         ];
     }
 

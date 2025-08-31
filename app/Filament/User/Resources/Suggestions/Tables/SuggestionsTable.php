@@ -8,11 +8,13 @@ use App\Models\Suggestion;
 use Exception;
 use Filament\Actions\{Action, ActionGroup, DeleteAction, EditAction, RestoreAction};
 use Filament\Forms\Components\Select;
+use Filament\Notifications\Notification;
 use Filament\Support\Enums\{TextSize, Width};
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\{TextColumn};
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\{Builder, Model};
+use Illuminate\Support\Facades\Auth;
 
 class SuggestionsTable
 {
@@ -34,11 +36,24 @@ class SuggestionsTable
                     ->size(TextSize::Large)
                     ->formatStateUsing(fn (Suggestion $record): string => $record->votes_count)
                     ->icon(Heroicon::ArrowUp)
-                    ->color(
-                        fn (Suggestion $record) => $record->hasVotedByUser(auth()->user()) ? 'info' : 'gray'
-                    )
-                    ->action(function (Suggestion $record): void {
+                    ->color(function (Suggestion $record) {
+                        if (!Auth::check()) {
+                            return 'gray';
+                        }
+
+                        return $record->hasVotedByUser(auth()->user()) ? 'info' : 'gray';
+                    })
+                    ->action(function (Suggestion $record) {
                         $user = auth()->user();
+
+                        if (!$user) {
+                            Notification::make()
+                                ->title(__('suggestions.login_to_vote'))
+                                ->warning()
+                                ->send();
+
+                            return redirect()->route('filament.user.auth.login');
+                        }
 
                         $record->hasVotedByUser($user)
                             ? $record->votes()->where('user_id', $user->id)->delete()
@@ -93,7 +108,7 @@ class SuggestionsTable
                     DeleteAction::make(),
                     RestoreAction::make(),
                 ])
-                    ->visible(fn () => auth()->user()->hasRole('admin'))
+                    ->visible(fn () => Auth::check() && auth()->user()->hasRole('admin'))
                     ->icon(Heroicon::Cog6Tooth)
                     ->size('sm')
                     ->label(false)

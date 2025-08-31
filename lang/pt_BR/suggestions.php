@@ -29,4 +29,6 @@ return [
     // Form fields
     'title_placeholder'       => 'Digite o título da sua sugestão',
     'description_placeholder' => 'Descreva sua sugestão detalhadamente',
+
+    'login_to_vote' => 'É necessário fazer login para votar',
 ];

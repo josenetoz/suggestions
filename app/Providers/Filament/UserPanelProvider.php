@@ -4,7 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\User\Pages\Auth\Login;
 use Exception;
-use Filament\Http\Middleware\{Authenticate, AuthenticateSession, DisableBladeIconComponents, DispatchServingFilamentEvent};
+use Filament\Http\Middleware\{AuthenticateSession, DisableBladeIconComponents, DispatchServingFilamentEvent};
 use Filament\{Panel, PanelProvider, Support\Enums\Width};
 use Filament\Support\Colors\Color;
 use Illuminate\Cookie\Middleware\{AddQueuedCookiesToResponse, EncryptCookies};
@@ -55,7 +55,7 @@ class UserPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
-                Authenticate::class,
+                //
             ])
             ->viteTheme('resources/css/filament/user/theme.css');
     }

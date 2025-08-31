@@ -11,6 +11,7 @@ use Filament\Support\Enums\{Alignment, IconPosition, Width};
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
 
 class CommentsRelationManager extends RelationManager
 {
@@ -20,7 +21,7 @@ class CommentsRelationManager extends RelationManager
 
     public function isReadOnly(): bool
     {
-        return false;
+        return !Auth::check();
     }
 
     /**
@@ -67,6 +68,7 @@ class CommentsRelationManager extends RelationManager
                     ->modalFooterActionsAlignment(Alignment::End)
                     ->icon(Heroicon::ChatBubbleBottomCenterText)
                     ->iconPosition(IconPosition::After)
+                    ->visible(Auth::check())
                     ->mutateDataUsing(function (array $data): array {
                         $data['user_id'] = auth()->id();
 
